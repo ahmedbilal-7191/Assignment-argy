@@ -6,12 +6,56 @@ const Signup = () => {
     const [loginOption, setLoginOption] = useState("aadhar");
     const [aadharNumber, setAadharNumber] = useState("");
     const [mobileNumber, setmobileNumber] = useState("");
-    const [drivingLicenseNumber, setdrivingLicenseNumber] = useState("");//driving license
+    const [drivingLicenseNumber, setdrivingLicenseNumber] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const [finotp, setfinotp] = useState(false);
     const [language, setLanguage] = useState("english");
     const [agreed, setAgreed] = useState(false);
     const [otp, setOtp] = useState('');
+
+
+
+
+
+    const generateRandomNumber = () => {
+        return Math.floor(Math.random() * 10);
+    };
+
+    const generateCaptcha = () => {
+        const num1 = generateRandomNumber();
+        const num2 = generateRandomNumber();
+        const sum = num1 + num2;
+        return {
+            num1,
+            num2,
+            sum
+        };
+    };
+
+
+    const [captcha, setCaptcha] = useState(generateCaptcha());
+    const [inputValue, setInputValue] = useState('');
+    const [isValid, setIsValid] = useState(false);
+
+
+    const handlecaptchaSubmit = (e) => {
+        e.preventDefault();
+        setIsValid(parseInt(inputValue) === captcha.sum);
+    };
+
+    const refreshCaptcha = () => {
+        setCaptcha(generateCaptcha());
+        setInputValue('');
+        setIsValid(false);
+    };
+
+    const handleChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+
+
+
 
     const handleLanguageChange = (lang) => {
         setLanguage(lang);
@@ -55,10 +99,10 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Here you can add your login logic
-        console.log("Login submitted");
-        console.log("Aadhar Number:", aadharNumber);
-        console.log("drivinglicense Number:", drivingLicenseNumber);
+       
+        // console.log("Login submitted");
+        // console.log("Aadhar Number:", aadharNumber);
+        // console.log("drivinglicense Number:", drivingLicenseNumber);
         setSubmitted(true);
     };
     const handleOTP = () => {
@@ -69,6 +113,38 @@ const Signup = () => {
             {finotp ? <RegistrationForm aadharNumber={aadharNumber} mobileNumber={mobileNumber} /> : (<div className='bg-white p-5 items-center justify-center w-1/2 m-auto mt-5  shadow-2xl'>
                 <p className='text-xl font-bold my-2'>Create your HealthCare professional ID</p>
                 <p className='my-2'>The HealthCare Professional ID Will Connect You to Indias Digital Health ecosysytem</p>
+
+                
+                <p>Capta</p>
+                <div className="max-w-md   p-5  rounded-lg shadow-xl">
+                    <h2 className="font-bold mb-2">Captcha Verification</h2>
+                    <form onSubmit={handlecaptchaSubmit}>
+                        <p>
+                            Solve the captcha: {captcha.num1} + {captcha.num2} =
+                            <input
+                                type="text"
+                                value={inputValue}
+                                onChange={handleChange}
+                                className="border border-gray-300 p-2 ml-2 rounded"
+                                required
+                            />
+                        </p>
+                        <button
+                            type="submit"
+                            className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                        >
+                            Verify
+                        </button>
+                        {isValid && <p className="text-green-600 mt-2">Captcha solved successfully!</p>}
+                    </form>
+                    <button
+                        onClick={refreshCaptcha}
+                        className="bg-gray-200 text-gray-800 px-4 py-2 mt-4 rounded hover:bg-gray-300 focus:outline-none focus:bg-gray-300"
+                    >
+                        Refresh Captcha
+                    </button>
+                </div>
+
 
                 <p className='my-2'>Generate HealthCare ID via</p>
                 <div
@@ -233,7 +309,7 @@ const Signup = () => {
                     </form>
                 )}
 
-                {/* {finotp&&(<RegistrationForm/>)} */}
+              
 
             </div>)}
 

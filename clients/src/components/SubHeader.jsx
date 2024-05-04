@@ -38,7 +38,7 @@ const SubHeader = () => {
                                     <li key={item.name}>
                                         <button
                                             onClick={() => navigate(item.slug)}
-                                            className='inline-bock px-6 py-2 duration-200 bg-blue-900	 hover:bg-blue-600 rounded-none'
+                                            className='inline-bock px-6 py-2 duration-200 bg-blue-900	text-white hover:bg-blue-600 rounded-none'
                                         >{item.name}</button>
                                     </li>
                                 ) : null

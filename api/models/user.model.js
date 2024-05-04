@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     healthcareId: {
         type: String,
         unique: true,
-        sparse: true // Allows null or empty values for this field
+        sparse: true 
     },
     mobileNumber: {
         type: String,
@@ -40,12 +40,12 @@ const userSchema = new mongoose.Schema({
     aadharNumber: {
         type: String,
         unique: true,
-        sparse: true // Allows null or empty values for this field
+        sparse: true 
     },
     drivingLicenseNumber: {
         type: String,
         unique: true,
-        sparse: true // Allows null or empty values for this field
+        sparse: true
     }
 });
 

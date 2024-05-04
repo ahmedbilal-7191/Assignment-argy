@@ -23,7 +23,7 @@ const RegistrationForm = ({aadharNumber,mobileNumber}) => {
     });
 
     useEffect(() => {
-        // Update mobileNumber field when aadharNumber prop changes
+       
         setFormData(prevState => ({
             ...prevState,
             mobileNumber: mobileNumber
@@ -40,7 +40,7 @@ const RegistrationForm = ({aadharNumber,mobileNumber}) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        // Here you can send formData to backend
+     
         try {
             const response = await fetch('/api/auth/signup', {
                 method: 'POST',
@@ -54,14 +54,14 @@ const RegistrationForm = ({aadharNumber,mobileNumber}) => {
                 const data = await response.json();
                 console.log('User created successfully:', data);
                 navigate('/success')
-                // Here you can handle success, like showing a success message or redirecting the user
+            
             } else {
                 console.error('Failed to create user:', response.statusText);
-                // Handle error, like showing an error message to the user
+      
             }
         } catch (error) {
             console.error('Error creating user:', error);
-            // Handle error, like showing an error message to the user
+   
         }
         console.log(formData);
     };
@@ -130,10 +130,7 @@ const RegistrationForm = ({aadharNumber,mobileNumber}) => {
                             </div>
                         </div>
 
-                        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            
-
-                        </div> */}
+                    
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -153,7 +150,7 @@ const RegistrationForm = ({aadharNumber,mobileNumber}) => {
                                     <option value="Telangana">Telangana</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Maharashtra">Maharashtra</option>
-                                    {/* Add district options here */}
+                         
                                 </select>
                             </div>
 
@@ -171,7 +168,7 @@ const RegistrationForm = ({aadharNumber,mobileNumber}) => {
                                     <option value="Hyderabad">Hyderabad</option>
                                     <option value="Vishakhapatnam">Vishakhapatnam</option>
                                     <option value="Mumbai">Mumbai</option>
-                                    {/* Add sub district options here */}
+                     
                                 </select>
                             </div>
 

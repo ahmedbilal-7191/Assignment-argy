@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import cookieParser from 'cookie-parser';
 import dotenv from "dotenv"
 import authRoutes from "./routes/auth.route.js"
-// import registerRoutes from "./routes/register.route.js"
+
 const app = express()
 dotenv.config();
 app.use(express.json());
@@ -26,7 +26,7 @@ app.listen(3000, () => {
 app.use('/api/auth', authRoutes);
 
 app.use(express.static(path.join(__dirname, '/clients/dist')));
-// app.use('/api/register', registerRoutes);
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'clients', 'dist', 'index.html'));
 })
